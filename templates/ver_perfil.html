@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Perfil</title>
+</head>
+<body>
+<h2> Ver Perfil</h2>
+        <table border="2">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Genero</td>
+                    <td>Documento</td>
+                    <td>Telefono</td>
+                    <td>FechaDeNacimiento</td>
+                    <td>User</td>
+                </tr>
+            </thead>
+
+           <tbody>
+                {% for profile in object_list %}
+                      <tr>
+                          <td>{{profile.id}}</td>
+                          <td>{{profile.get_genero_display}}</td>
+                          <td>{{profile.documento}}</td>
+                          <td>{{profile.telefono}}</td>
+                          <td>{{profile.nacimiento}}</td>
+                          <td>{{profile.user}}</td>
+                      </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+<input type="button" onclick="location.href='/insertar_perfil' "value="Agregar perfil">
+</body>
+</html>
+{% endblock %}

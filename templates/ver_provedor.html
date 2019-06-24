@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Provedor </title>
+</head>
+<body>
+    <h2> Ver Provedor </h2>
+        <table border="2">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>User</td>
+                    <td>Rango</td>
+                    <td>Editar</td>
+                    <td>Eliminar</td>
+                </tr>
+            </thead>
+
+           <tbody>
+                {% for provedor in object_list %}
+                      <tr>
+                          <td>{{provedor.id}}</td>
+                          <td>{{provedor.user}}</td>
+                          <td>{{provedor.get_rango_display}}</td>
+                          <td> <input type="button" onclick="location.href='/editar_provedor/{{ provedor.id }}'" value="Editar"></td>
+                          <td> <input type="button" onclick="location.href='/eliminar_provedor{{ provedor.id }}'" value="Eliminar"></td>
+                      </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+<input type="button" onclick="location.href='/insertar_provedor' "value="Agregar Provedor">
+<input type="button"onclick="location.href='/logout'" value="Cerrar Sesión">
+</body>
+</html>
+{% endblock %}

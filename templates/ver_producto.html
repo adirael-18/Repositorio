@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Productos</title>
+</head>
+<body>
+    <h2>Ver Productos</h2>
+        <table border="1">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>nombre</td>
+                <td>stock</td>
+                <td>valorcosto</td>
+                <td>estado</td>
+                <td>valorventa</td>
+                <td>provedor</td>
+                {% if perms.Plaza.delete_producto %}
+                <td>Editar</td>
+                            {% endif %}
+                {% if perms.Plaza.delete_producto %}
+                <td>Eliminar</td>
+                            {% endif %}
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for producto in object_list %}
+                <tr>
+                    <td>{{ producto.id }}</td>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.get_stock_display }}</td>
+                    <td>{{ producto.valorcosto }}</td>
+                    <td>{{ producto.get_estado_display }}</td>
+                    <td>{{ producto.valorventa }}</td>
+                    <td>{{ producto.provedor }}</td>
+                    {% if perms.Plaza.delete_producto %}
+                    <td> <input type="button" onclick="location.href='/editar_producto/{{ producto.id }}'" value="Editar"></td>
+                    {% endif %}
+                    {% if perms.Plaza.delete_producto %}
+                        <td> <input type="button" onclick="location.href='/eliminar_producto/{{ producto.id }}'" value="Eliminar"></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if perms.Plaza.delete_producto %}
+<input type="button" onclick="location.href='/insertar_producto'" value="Agregar Producto">
+    {% endif %}
+<input type="button"onclick="location.href='/logout'" value="Cerrar Sesión">
+</body>
+</html>
+{% endblock %}
